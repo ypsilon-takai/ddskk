@@ -226,6 +226,10 @@
   :prefix "skk-act-"
   :group 'skk-input-enhanced)
 
+(defgroup skk-dvojp nil "SKK $B$G3HD%%m!<%^;zF~NO(B DvorakJP $B$r;H$&@_Dj(B"
+  :prefix "skk-dvojp-"
+  :group 'skk-input-enhanced)
+
 (defgroup skk-azik nil "SKK $B$G3HD%%m!<%^;zF~NO(B AZIK $B$r;H$&@_Dj(B"
   :prefix "skk-azik-"
   :group 'skk-input-enhanced)
@@ -283,7 +287,7 @@
 $B$?$@$7!"%?!<%_%J%k$G(B Emacs $B$rMxMQ$7$F$$$k>l9g$OH=Dj$G$-$:!"(B
 $B%f!<%6$N0U?^$H9g$o$J$$$+$b$7$l$J$$$N$G!"$3$N%*%W%7%g%s$+(B
 `frame-background-mode' $B$r$"$i$+$8$a@_Dj$7$F$*$/$3$H$,K>$^$7$$!#(B
-$B$3$N%*%W%7%g%s$O(B ~/.skk $B$K@_Dj$7$F$bH?1G$5$l$J$$!#(B~/.emacs.d/init.el $B$+(B
+$B$3$N%*%W%7%g%s$O(B ~/.skk $B$K@_Dj$7$F$bH?1G$5$l$J$$!#(B~/.emacs $B$+(B
 \\[customize] $B$K$F!"(BSKK $B$,FI$_9~$^$l$kA0$K@_Dj$9$k$3$H$,I,MW!#(B"
   :type '(choice (const dark)
 		 (const light)
@@ -2764,6 +2768,17 @@ Emacs $B$N%*%j%8%J%k$NF0:n$G$O!"(B`self-insert-command' $B$K%P%$%s%I$5$l$?%-!
   "*skk-act $B$r(B load $B$7$?8e$K<B9T$5$l$k(B hook."
   :type 'hook
   :group 'skk-act)
+
+;; skk-dvojp.el related.
+(defcustom skk-use-dvojp nil
+  "*Non-nil $B$G$"$l$P3HD%%m!<%^;zF~NO(B DvorakJP $B$rMxMQ$9$k!#(B"
+  :type 'boolean
+  :group 'skk-dvojp)
+
+(defcustom skk-dvojp-load-hook nil
+  "*skk-dvojp $B$r(B load $B$7$?8e$K<B9T$5$l$k(B hook."
+  :type 'hook
+  :group 'skk-dvojp)
 
 ;; skk-azik.el related.
 (defcustom skk-use-azik nil

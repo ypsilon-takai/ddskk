@@ -256,7 +256,7 @@ dependent."
 			 (plist-member (symbol-plist sym) 'standard-value))
 		(set-default sym
 			     (eval (car (get sym 'standard-value)))))))
-  (dolist (feature '(skk-act skk-azik))
+  (dolist (feature '(skk-act skk-azik skk-dvojp))
     (when (featurep feature)
       (unload-feature feature)))
   (let (skk-mode-invoked)
@@ -328,7 +328,10 @@ dependent."
   (cond (skk-use-act
 	 ;; 拡張ローマ字入力 ACT
 	 (require 'skk-act))
-	(skk-use-azik
+	(skk-use-dvojp
+	 ;; 拡張ローマ字入力 DvorakJP
+	 (require 'skk-dvojp))
+        (skk-use-azik
 	 ;; 拡張ローマ字入力 AZIK
 	 (require 'skk-azik))
 	((featurep 'skk-tutcdef)
