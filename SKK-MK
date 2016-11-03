@@ -232,6 +232,7 @@ This version of SKK requires MULE features"))
 		skk-cus
 		skk-dcomp
 		skk-develop
+                skk-dvojp
 		skk-gadget
 		skk-hint
 		skk-inline
