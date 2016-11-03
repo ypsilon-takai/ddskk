@@ -24,8 +24,8 @@ Describes how to install SKK for Emacs on Microsoft Windows.
 
 ** APEL
 
-In DDSKK 16.1, installation of APEL (A Portable Emacs Library) is no
-longer required under GNU Emacs 22 or later.  For XEmacs,
+In DDSKK 16.2, installation of APEL (A Portable Emacs Library) is no
+longer required under GNU Emacs 23 or later.  For XEmacs,
 make sure you have APEL 10.7 or later installed.  It is highly
 recommended that you install the latest release.  APEL is available
 at:
@@ -71,7 +71,7 @@ format, follow these steps.
 3. After you read the following installation instructions, do `make
    install'.  This will copy both SKK-JISYO.L and SKK-JISYO.L.cdb to
    the same place as SKK.tut, e.g. /usr/share/skk or
-   c:/emacs-24.2/etc/skk.
+   c:/emacs-25.1/etc/skk.
    
 4. Set skk-cdb-large-jisyo in your ~/.skk as the following.
 
@@ -104,13 +104,13 @@ Before actual installation, you can find out installation paths with
 If your editor is not just named emacs, you can specify the name as
 the following.
 
-    % make what-where EMACS=/usr/bin/emacs-24.3
+    % make what-where EMACS=/usr/bin/emacs-25.1
 
 If installation paths seem all right, proceed to installation with
 
     % make install
 or
-    % make install EMACS=/usr/bin/emacs-24.3
+    % make install EMACS=/usr/bin/emacs-25.1
 
 ** Installation for XEmacs
 
@@ -159,6 +159,7 @@ Since the web manual is for the latest Daredevil SKK, it might not be
 compatible with the version you installed.
 
 PDF manuals for old version are available. see the following files.
+    http://openlab.jp/skk/skk-manual/skk-16.1.pdf
     http://openlab.jp/skk/skk-manual/skk-15.2.pdf
     http://openlab.jp/skk/skk-manual/skk-15.1.pdf
     http://openlab.jp/skk/skk-manual/skk-14.4.pdf

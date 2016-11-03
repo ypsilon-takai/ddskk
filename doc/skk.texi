@@ -34,7 +34,7 @@
 @c  Keywords: japanese
 @c
 @set SKK-VERSION 16.1.50
-@set UPDATED Date: 2016/03/15 23:06:27
+@set UPDATED Date: 2016/10/05 20:23:45
 
 @dircategory Emacs
 @dircategory GNU Emacs Lisp
@@ -154,7 +154,6 @@ approved by the author.
 
 インストール
 
-* APEL のインストール::
 * DDSKK のインストール::
 * 辞書について::
 * 辞書の入手::
@@ -256,9 +255,9 @@ DDSKK @value{SKK-VERSION} が動作すると思われる Emacsen のバージョ
 おりです。
 
 @itemize @bullet
-@item GNU Emacs 22.1 以降 (推奨)
 @item GNU Emacs 23.1 以降 (推奨)
 @item GNU Emacs 24.1 以降 (推奨)
+@item GNU Emacs 25.1 以降 (推奨)
 @item Mule 機能付きでコンパイルされた XEmacs 21.4 の最新版
 @item Mule 機能付きでコンパイルされた XEmacs 21.5 の最新版
 @end itemize
@@ -269,7 +268,7 @@ XEmacs に関しては、XEmacs 本体とは別に配布されているパッケ
 
 総論として、現在は XEmacs よりも GNU Emacs での動作がよくテストされてお
 り、最近では XEmacs でのテストは充分行われていません。
-GNU Emacs 22 以上での利用が最も推奨されます。
+GNU Emacs 23 以上での利用が最も推奨されます。
 
 現時点で Emacs のバージョンごとに少なくとも以下の制限があります。
 
@@ -286,11 +285,8 @@ GNU Emacs 21 のユーザは DDSKK 14.4 をお使いください。
 
 @item GNU Emacs 22.3
 
-@itemize @bullet
-@item JIS X 0213 対応には Mule-UCS の導入が必要です。
-@item X Window System 上でのメニューバーの日本語表示は GTK 対応版のみです。
-@item @file{skk-search-web.el} を利用するには @file{json.el} が必要です。
-@end itemize
+DDSKK 16.2 以降は GNU Emacs 22 はサポート対象外です。
+GNU Emacs 22 のユーザは DDSKK 16.1 をお使いください。
 
 @item GNU Emacs 23.3
 
@@ -314,6 +310,10 @@ GNU Emacs 24.3 のユーザは DDSKK 15 をお使いください。
 @item coding tag を明示していないファイルは utf-8 と取り扱われます@footnote{@code{2013-06-11 international/mule-conf.el (file-coding-system-alist)}}。DDSKK 15.2 で対策済みです。
 @item NTEmacs は 24.3 と比べてディレクトリ構成が異なります@footnote{Emacs News: Changes in Emacs 24.4 on Non-Free Operating Systems}。DDSKK 15.2 で対策済みです。
 @end itemize
+
+@item GNU Emacs 25.1
+
+DDSKK 15.2 以降をお使いください（DDSKK 16 を推奨します）。
 
 @item XEmacs 21.4
 
@@ -379,28 +379,12 @@ DDSKK の主な特徴は、次のとおりです。
 @cindex インストール
 
 @menu
-* APEL のインストール::
 * DDSKK のインストール::
 * 辞書について::
 * 辞書の入手::
 * 辞書を DDSKK と同時にインストールする::
 * 辞書サーバの入手::
 @end menu
-
-@node APEL のインストール
-@section APEL のインストール
-@cindex APEL
-
-DDSKK 14.2 からは、GNU Emacs 22 以上を利用する場合
-においては APEL を別途インストールする必要がなくなりました。APEL に依存し
-ている他の elisp プログラムを使用していなければ、インストール済の APEL は
-削除することが可能です。
-
-XEmacs をお使いの場合は、 DDSKK をインストールする前に
-APEL (APEL 10.8 以上を推奨) をインストールして下さい。
-APEL は次のサイトから入手できます。
-
-@uref{http://git.chise.org/elisp/apel/, APEL}
 
 @node DDSKK のインストール
 @section DDSKK のインストール
@@ -505,6 +489,12 @@ $ su
 
 @node XEmacs へのインストール
 @subsection XEmacs へのインストール
+@cindex APEL
+
+XEmacs をお使いの場合は、 DDSKK をインストールする前に APEL (APEL 10.8 以
+上を推奨) をインストールして下さい。APEL は次のサイトから入手できます。
+
+@uref{http://git.chise.org/elisp/apel/, APEL}
 
 XEmacs でパッケージとしてインストールする場合は、
 まず、@option{what-where-package} を引数に @command{make} コマンドを実行
@@ -590,7 +580,7 @@ drwxr-xr-x 1 user user  99999 2011-00-00 00:00 bayesian
 @vindex package-archives
 @findex package-initialize
 
-2014年12月、MELPA@footnote{@uref{http://melpa.org/, Milkypostman's Emacs Lisp Package Archive}}
+2014年12月、MELPA@footnote{@uref{https://melpa.org/, Milkypostman's Emacs Lisp Package Archive}}
 に DDSKK が登録されたことにより GNU Emacs でも @file{package.el} 
 @footnote{GNU Emacs 24 以降で標準で搭載されています。GNU Emacs 23 以前では手動でインストール必要があります。@*
 @url{http://wikemacs.org/wiki/Package.el}}
@@ -2274,11 +2264,7 @@ JIS X 0201 カナ@footnote{いわゆる半角カナ。以下、このマニュ�
 @item skk-jisx0213.el
 @cindex @file{skk-jisx0213.el}
 
-JIS X 0213 文字集合を扱うプログラムです。この機能は Emacs 23 では標準で
-利用できます。それ未満のバージョンの Emacs においては、Mule-UCS を導入す
-るなどの対策が必要です。Mule-UCS については 
-@uref{http://tats.haun.org/mule-ucs/, Mule-UCS Unofficial Site} を参照
-してください。
+JIS X 0213 文字集合を扱うプログラムです。
 
 @item skk-jisyo-edit-mode.el
 @cindex @file{skk-jisyo-edit-mode.el}
@@ -2344,11 +2330,11 @@ Lookup で検索できる辞書を使って単語の候補を出力するプロ�
 
 @item skk-search-web.el
 
-Google CGI API for Japanese Input
+Google CGI API for Japanese Input を利用したかな漢字変換。
 
-Google サジェスト
+辞書登録モードに Google サジェスト を初期表示する。
 
-GNU Emacs 22 を使用している場合は @file{json.el} が必要です。
+@xref{Google CGI API for Japanese Input を利用したかな漢字変換}.
 
 @item skk-server-completion.el
 @cindex @file{skk-server-completion.el}
@@ -7905,7 +7891,6 @@ XEmacs の場合、シンボルは coding system そのものでは
 @end itemize
 
 デフォルトは @code{nil} です。この場合、シンボル @code{euc-jis-2004} が使われます
-@footnote{GNU Emacs 22 まではシンボル @code{euc-jisx0213} が使われます。}
 @footnote{関数 @code{skk-find-coding-system} を参照のこと。}
 。
 
@@ -8603,6 +8588,8 @@ JIS コード/区点コード入力プロンプトの表示に対して単に @k
 @node 文字コード一覧
 @subsection 文字コード一覧
 @kindex M-x skk-list-chars
+@kindex M-x list-charset-chars
+@kindex C-x 8 RET
 @vindex skk-kcode-charset
 
 @kbd{M-x skk-list-chars} と実行すると、変数 @code{skk-kcode-charset} が指
@@ -8671,7 +8658,7 @@ skk-list-chars を抜ける。
 
 @end table
 
-ほか、Emacs のコマンド @kbd{M-x list-charset-chars} も有用でしょう。
+ほか、Emacs のコマンド @kbd{M-x list-charset-chars} や @kbd{C-x 8 RET} も有用でしょう。
 
 @defvr {ユーザ変数} skk-list-chars-table-header-face
 コード一覧の枠線などに適用するフェイスです。
@@ -8748,6 +8735,7 @@ skk-list-chars を抜ける。
 * skk-lookup::                  Lookup を用いた辞書変換
 * skk-look::                    look コマンドを用いた辞書変換
 * Lisp シンボル名の補完検索変換::
+* Google CGI API for Japanese Input を利用したかな漢字変換::
 @end menu
 
 @node skk-lookup
@@ -9059,6 +9047,51 @@ A~ /チルド付きA(LATIN CAPITAL LETTER A WITH TILDE)/
 デフォルトは @kbd{~} です。
 
 @end defvr
+
+@node Google CGI API for Japanese Input を利用したかな漢字変換
+@subsection Google CGI API for Japanese Input を利用したかな漢字変換
+@cindex Google CGI API for Japanese Input
+@vindex skk-use-search-web
+@findex skk-search-web
+@vindex skk-search-prog-list
+@vindex skk-read-from-minibuffer-function
+
+かな漢字変換に Google CGI API for Japanese Input を利用することができます。
+連文節変換も可能となります。
+
+Google CGI API for Japanese Input については、次の URL を参照してください。
+
+@url{http://www.google.co.jp/ime/cgiapi.html}
+
+まず、@file{~/.skk} にて、変数 @code{skk-use-search-web} を @code{non-nil} に
+設定します。これにより、skk-mode を起動した際に @file{skk-search-web.el} を require す
+るようになります。
+
+同じく @file{~/.skk} にて、リスト @code{skk-search-prog-list} の一番最後
+の要素として、関数 @code{skk-search-web} を追加します。
+
+@lisp
+@group
+(add-to-list 'skk-search-prog-list
+             '(skk-search-web 'skk-google-cgi-api-for-japanese-input)
+             t)
+@end group
+@end lisp
+
+以上の設定によって、通常のかな漢字変更の候補が尽きたときに関数 @code{skk-search-web} が
+実行され、Google CGI API for Japanese Input による変換結果が表示されます。
+
+そのほか、変数 @code{skk-read-from-minibuffer-function} を以下のように設
+定することで、辞書登録モードへの突入時の初期値に Google サジェストを表示す
+ることもできます。
+
+@lisp
+@group
+(setq skk-read-from-minibuffer-function
+      (lambda ()
+         (car (skk-google-suggest skk-henkan-key))))
+@end group
+@end lisp
 
 @node 飾りつけ
 @section 飾りつけ
@@ -10163,7 +10196,6 @@ DDSKK はローマ字式ではない、いわゆるかな入力方式をサポ�
 
 @menu
 * 交ぜ書き変換::
-* Google CGI API for Japanese Input を利用したかな漢字変換::
 @end menu
 
 @node 交ぜ書き変換
@@ -10180,43 +10212,6 @@ DDSKK はローマ字式ではない、いわゆるかな入力方式をサポ�
 インストール方法などは、次の投稿を参考にしてください。
 
 @url{http://mail.ring.gr.jp/skk/201111/msg00037.html}
-
-@node Google CGI API for Japanese Input を利用したかな漢字変換
-@section Google CGI API for Japanese Input を利用したかな漢字変換
-
-かな漢字変換に Google CGI API for Japanese Input を利用することができます。
-連文節変換も可能となります。
-
-Google CGI API for Japanese Input については、次の URL を参照してください。
-
-@url{http://www.google.co.jp/ime/cgiapi.html}
-
-@file{~/.skk} にて、リスト @code{skk-search-prog-list} の要素として、
-関数 @code{skk-search-web} を追加します。
-
-@lisp
-@group
-(add-to-list 'skk-search-prog-list
-             '(skk-search-web 'skk-google-cgi-api-for-japanese-input)
-             t)
-@end group
-@end lisp
-
-同じく @file{~/.skk} にて、変数 @code{skk-use-search-web} を @code{non-nil} に
-設定します。skk-mode を起動した際に @file{skk-search-web.el} を require するよ
-うになります。
-
-そのほか、変数 @code{skk-read-from-minibuffer-function} を以下のように設定する
-ことで、辞書登録モードへの突入時の初期値に Google サジェストを利用することもで
-きます。
-
-@lisp
-@group
-(setq skk-read-from-minibuffer-function
-      (lambda ()
-         (car (skk-google-suggest skk-henkan-key))))
-@end group
-@end lisp
 
 @node SKKに関する情報
 @chapter SKKに関する情報
@@ -10504,7 +10499,7 @@ SKK 本体と SKK 辞書が必要です。オプションで辞書サーバを�
 XEmacs では事前に APEL をインストールしてください。
 
 @display
-@xref{APEL のインストール}.
+@xref{XEmacs へのインストール}.
 @end display
 
 SKK 本体は以下から入手できます。

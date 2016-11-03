@@ -6,7 +6,7 @@
 #+OPTIONS: H:4 toc:nil
 #+AUTHOR: Yuh Ohmura <yutopia@y6.dion.ne.jp>, NAKAJIMA Mikio/中島幹夫 <minakaji@osaka.email.ne.jp>
 
-Windows Vista, 7, 8.1 の各オペレーティングシステムの上で動く Emacs に DDSKK をインストールする方法を解説します。
+Windows Vista, 7, 8, 10 の各オペレーティングシステムの上で動く Emacs に DDSKK をインストールする方法を解説します。
 
 同梱の INSTALL 及び README.md も必ずご覧下さい。
 
@@ -27,7 +27,7 @@ DDSKK 15.1 以降は Meadow 3(Emacs 21) はサポート対象外です。 Meadow
 
 ** Emacs 22 以降
 
-DDSKK 最新版をインストールしてください。
+DDSKK 16.2 以降は Emacs 22 はサポート対象外です。 Emacs 22 のユーザは DDSKK 16.1 をお使いください。
 
 ** Emacs 24.3 以降
 
@@ -36,6 +36,10 @@ DDSKK 14.4 では isearch の不具合があります。DDSKK 15.1 をインス�
 ** Emacs 24.4 以降
 
 NTEmacs 24.4 は、同 24.3 と比べてディレクトリ構成が異なります。DDSKK 15.2 をインストールしてください。
+
+** Emacs 24.4 以降
+
+DDSKK 15.2 以降をインストールしてください。
 
 ----------
 
@@ -88,9 +92,9 @@ UnxUtils.zip をダウンロード・展開して、例えば
 SKK ディストリビューションを上記の tar.exe を用いて展開します。
 #+BEGIN_SRC
      % cd c:/tmp
-     % gunzip ddskk-15.2.tar.gz
-     % tar xvf ddskk-15.2.tar
-     % cd ddskk-15.2
+     % gunzip ddskk-16.1.tar.gz
+     % tar xvf ddskk-16.1.tar
+     % cd ddskk-16.1
 #+END_SRC
 
 **** SKK 辞書の取得

@@ -267,28 +267,29 @@ This version of SKK requires MULE features"))
 		;; VIP 3.7
 		;; vip
 		)))
-    (cond
-     ((featurep 'xemacs)
-      ;; XEmacs
-      (when (or (featurep 'gdbm)
-		(featurep 'dbm)
-		(featurep 'berkdb)
-		(featurep 'berkeley-db))
-	(add-to-list 'list 'skk-dbm))
-      (add-to-list 'list 'skk-xemacs))
-     (running-gnu-emacs
-      ;; FSFmacs
-      (add-to-list 'list 'ccc)
-      (add-to-list 'list 'skk-emacs)))
+
+    (cond ((featurep 'xemacs)		; XEmacs
+	   (when (or (featurep 'gdbm)
+		     (featurep 'dbm)
+		     (featurep 'berkdb)
+		     (featurep 'berkeley-db))
+	     (add-to-list 'list 'skk-dbm))
+	   (add-to-list 'list 'skk-xemacs))
+
+	  (running-gnu-emacs		; FSFmacs
+	   (add-to-list 'list 'ccc)
+	   (add-to-list 'list 'skk-emacs)))
+
     ;; skk-jisx0213.el
     (when (or (coding-system-p 'euc-jisx0213)
 	      (and (fboundp 'find-coding-system)
 		   (find-coding-system 'euc-jisx0213))
 	      (condition-case nil
-		  (and (require 'jisx0213)
-		       (require 'un-define))
+		  (and (require 'jisx0213) ; Mule-UCS
+		       (require 'un-define)) ; Mule-UCS
 		(error)))
       (add-to-list 'list 'skk-jisx0213))
+
     ;; skk-lookup.el
     (when (condition-case nil
 	      ;; you might have to add lookup installed directory
@@ -297,6 +298,7 @@ This version of SKK requires MULE features"))
 		(require 'lookup))
 	    (error))
       (add-to-list 'list 'skk-lookup))
+
     ;; skk-w3m.el
     ;;(when (condition-case nil
     ;;          (require 'w3m-search)
@@ -1147,20 +1149,29 @@ SKK tutorials:
 
 load-path の設定
 ----------------
-次のとおり 変数 load-path を設定してください。既にパスが通っているならば不要です。
+次のとおり 変数 load-path を設定してください。既にパスが通っているならば
+不要です。
   (setq load-path (cons \"" SKK_LISPDIR "\" load-path))
 
 info ディレクトリの設定
 -----------------------
-次のとおり 変数 Info-default-directory-list を設定してください。既にパスが通っているならば不要です。
+次のとおり 変数 Info-default-directory-list を設定してください。既にパス
+が通っているならば不要です。
   (setq Info-default-directory-list
         (cons \"" SKK_INFODIR "\" Info-default-directory-list))
 
 ディレクトリファイル " SKK_INFO_DIR_FILE " へのノード追加は完了しています。
 
-以上で終了です。
+Emacs の設定
+------------
+上記の設定内容を ~/.emacs に記載して Emacs を再起動すれば DDSKK を使用す
+ることができるはずです。
+もし DDSKK が起動しないようであれば ~/.emacs に
+  (require 'skk-autoloads)
+と記載して、あらためて Emacs を再起動してください。
 
-Emacs を再起動すると DDSKK を使用することができます。
+DDSKK の設定
+------------
 etc/dot.emacs と etc/dot.skk に設定例が挙げられていますので参考にしてください。
 Info もお読みください。
 "))

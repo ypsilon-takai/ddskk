@@ -45,9 +45,8 @@
 
 (defun skk-find-window-system ()
   (cond
-   ((eval-when-compile (and (featurep 'emacs)
-			    (>= emacs-major-version 23)))
-    ;; GNU Emacs 23 or later
+   ((eval-when-compile (featurep 'emacs))
+    ;; GNU Emacs
     (let ((frames (frame-list))
 	  val)
       (while (and (not val) frames)
@@ -59,7 +58,7 @@
 	      frames (cdr frames)))
       val))
    (t
-    ;; Emacs 22 and XEmacs
+    ;; XEmacs
     window-system)))
 
 ;;;###autoload
@@ -586,7 +585,7 @@ C-0 SPC $B$G;HMQ$5$l$k(B"
   "*$B<-=q%P%C%U%!$N%3!<%G%#%s%0%7%9%F%`!#(B
 $B4pK\E*$K$O(B coding system $BL>$r;XDj$9$k!#(B
 $BJ8;zNs(B \"euc\", \"ujis\", \"sjis\", \"jis\" $B$N;XDj$b<u$1IU$1$k(B (`skk-coding-system-alist')$B!#(B
-$B%G%U%)%k%H$O(B nil $B$G$"$j!"<-=q%P%C%U%!$N%3!<%G%#%s%0%7%9%F%`$O(B euc-jis-2004 (GNU Emacs 22 $B$^$G$O(B euc-jisx0213) $B$H$J$k(B (`skk-find-coding-system')$B!#(B
+$B%G%U%)%k%H$O(B nil $B$G$"$j!"<-=q%P%C%U%!$N%3!<%G%#%s%0%7%9%F%`$O(B euc-jis-2004 $B$H$J$k(B (`skk-find-coding-system')$B!#(B
 $B8D?M<-=q$b$3$N%3!<%G%#%s%0%7%9%F%`$GJ]B8$5$l$k!#(B"
   :type '(radio coding-system
 		(radio :tag "$B%3!<%I$NDL>N(B"
@@ -2150,17 +2149,18 @@ o $B8uJd0lMw$rI=<($9$k$H$-(B ($B8uJd$NJ8;zNs$N8e$m$K%"%N%F!<%7%g%s$,IU2C$5$l$
 
 ;;; -- Internal constants and variables of skk.el
 (defconst skk-coding-system-alist
-  (cond ((and (featurep 'emacs)
-	      (>= emacs-major-version 23))
+  (cond ((featurep 'emacs)
 	 '(("euc" . euc-jis-2004)
 	   ("ujis" . euc-jis-2004)
 	   ("sjis". japanese-shift-jis-2004)
 	   ("jis" . iso-2022-jp-3)))
-	((featurep 'jisx0213)
+
+	((featurep 'jisx0213)		; Mule-UCS
 	 '(("euc" . euc-jisx0213)
 	   ("ujis" . euc-jisx0213)
 	   ("sjis". shift_jisx0213)
 	   ("jis" . iso-2022-jp-3-strict)))
+
 	(t
 	 '(("euc" . euc-japan)
 	   ("ujis" . euc-japan)
@@ -3003,8 +3003,7 @@ Apple OS X $B$G$OI8=`$N!V<-=q!W$rMxMQ$G$-$k!#(B"
 (defvar skkannot-py-buffer nil)
 
 (defvar skkannot-url-installed-p
-  (if (and (featurep 'emacs)
-	   (>= emacs-major-version 22))
+  (if (featurep 'emacs)
       t
     'untested))
 
@@ -5395,7 +5394,7 @@ then filename of the English version will be \"SKK.tut.E\".")
   :group 'skk-visual)
 
 ;;; skk-get related.
-(defvar skk-get-jisyo-direcroty "~/.emacs.d/skk-get-jisyo"
+(defvar skk-get-jisyo-directory "~/.emacs.d/skk-get-jisyo"
   ;; (expand-file-name "../../../skk" data-directory)
   "`skk-get'$B$NJ]B8@h(B")
 

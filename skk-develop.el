@@ -29,9 +29,11 @@
 
 (eval-when-compile
   (require 'skk-macs)
-  (require 'skk-vars)
   (require 'tar-util)
   (require 'url))
+
+(eval-and-compile
+  (require 'skk-vars))
 
 (eval-when-compile
   (defvar skk-exserv-list))
@@ -132,8 +134,8 @@ mail-user-agent $B$r@_Dj$9$k$3$H$K$h$j9%$_$N%a!<%k%$%s%?!<%U%'%$%9$r;HMQ$9$k$3$
 	  (cond ((null (car (file-attributes p)))
 		 (delete-file p))
 		(t
-		 (delete-directory p)	; GNU Emacs22 $B$^$G(B
-;;;		 (delete-directory p t)	; GNU Emacs23 $B$+$i(B
+		 (delete-directory p)	; GNU Emacs23.1 $B$^$G(B
+;;;		 (delete-directory p t)	; GNU Emacs23.2 $B$+$i(B
 		 )))))))
 
 (defun skk-get-mkdir (dir)
@@ -213,10 +215,8 @@ mail-user-agent $B$r@_Dj$9$k$3$H$K$h$j9%$_$N%a!<%k%$%s%?!<%U%'%$%9$r;HMQ$9$k$3$
 ;;;###autoload
 (defun skk-get (dir)
   "DIR."
-  (interactive "Dskk-get directory: " )
-  (let ((jisyo-dir (if dir
-			(expand-file-name dir)
-		     (expand-file-name skk-get-jisyo-direcroty))))
+  (interactive (list (read-directory-name "skk-get directory: " (expand-file-name skk-get-jisyo-directory))))
+  (let ((jisyo-dir (expand-file-name dir)))
     (skk-get-mkdir jisyo-dir)
     (skk-get-download jisyo-dir)
     (skk-get-generate-gzip-d jisyo-dir)
